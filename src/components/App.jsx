@@ -3,7 +3,9 @@
 // import Modal from 'components/Modal/Modal';
 
 // import SearchBar from './SearchBar/SearchBar';
-import { Container } from './App.styled';
+// import { Link } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
+import { Container, Header, Logo, Link } from './App.styled';
 // import { Btn } from './Button/Button.styled';
 // import { Loader } from './Loader/Loader';
 
@@ -12,69 +14,123 @@ import { Container } from './App.styled';
 // import { ErrorMessage } from './ErrorMessage/ErrorMessage';
 // import { ImageGalery } from './ImageGallery/ImageGallery';
 
-export const App = () => {
-  // const [images, setImages] = useState([]);
-  // const [largeImgURL, setLargeImgURL] = useState('');
-  // const [value, setValue] = useState('');
-  // const [page, setPage] = useState(1);
-  // // const [per_page] = useState(12);
-  // const [isError, setIsError] = useState('');
-  // const [showBtn, setShowBtn] = useState(false);
-  // const [isEmpty, setIsEmpty] = useState(false);
-  // const [isLoading, setIsLoading] = useState(false);
+import React from 'react';
+import Home from './Pages/Home';
+import Movies from './Pages/Movies';
+import MovieDetails from './Pages/MovieDetails';
+import NotFound from './Pages/NotFound';
+// import getMovies from 'servises/api';
 
-  // useEffect(() => {
-  //   if (!value) {
-  //     return;
-  //   }
-  //   setIsLoading(true);
-  //   getImages(value, page)
-  //     .then(data => {
-  //       setIsEmpty(!data.hits.length);
-  //       setImages(i => [...i, ...data.hits]);
-  //       setShowBtn(page < Math.ceil(data.total / 12));
-  //     })
-  //     .catch(error => {
-  //       setIsError(true);
-  //     })
-  //     .finally(() => {
-  //       setIsLoading(false);
-  //     });
-  // }, [page, value]);
-
-  // const nextPage = () => {
-  //   setPage(page => page + 1);
-  // };
-
-  // const handleSubmit = value => {
-  //   setValue(value);
-  //   setPage(1);
-  //   setImages([]);
-  //   setShowBtn(false);
-  //   setIsEmpty(false);
-  // };
-
-  // const toggleModal = link => {
-  //   setLargeImgURL(link);
-  // };
+const App = () => {
+  // const { results } = getMovies('trending/all/day', {});
+  // console.log(results);
 
   return (
     <Container>
-      {/* <SearchBar onSubmit={handleSubmit} />
-      <ImageGalery images={images} openModal={toggleModal} />
-      {isEmpty && (
-        <ErrorMessage>
-          There are no such images ... Try again {isError}
-        </ErrorMessage>
-      )}
-      {isError && <ErrorMessage>{isError}</ErrorMessage>}
-      {showBtn && <Btn onClick={nextPage}>Load more</Btn>}
-      {isLoading && <Loader />}
-      {largeImgURL && (
-        <Modal onClose={toggleModal}>
-          <img src={largeImgURL} alt="largeImg" />
-        </Modal>
-      )} */}
+      <Header>
+        <Logo>
+          <span role="img" aria-label="computer icon">
+            💻
+          </span>{' '}
+          GoMerch Store
+        </Logo>
+        <nav>
+          <Link to="/">Home</Link>
+          <Link to="/movies">Movies</Link>
+        </nav>
+      </Header>
+
+      <Routes>
+        {/* my practice */}
+        {/* <Route path="/" element=<Layout /> /> */}
+        <Route path="/" element={<Home />} />
+        <Route path="/movies" element={<Movies />} />
+        <Route path="/movies/:movieId" element={<MovieDetails />}>
+          <Route path="cast" element={<div>Cast</div>} />
+          <Route path="reviews" element={<div>Reviews</div>}></Route>
+        </Route>
+
+        <Route path="*" element={<NotFound />} />
+
+        {/* Practice Repeta */}
+        {/* <Route path="/" element={<Layout />}>
+        <Route index element={<Home />} />
+        <Route path="/dogs" element={<Dogs />} />
+        <Route path="/dogs/:dogId" element={<DogDetails />}>
+          <Route path="subbreeds" element={<Subbreeds />} />
+          <Route path="gallery" element={<Gallery />} />
+        </Route>
+      </Route> */}
+      </Routes>
     </Container>
   );
 };
+
+export default App;
+
+// export const App = () => {
+//   // const [images, setImages] = useState([]);
+//   // const [largeImgURL, setLargeImgURL] = useState('');
+//   // const [value, setValue] = useState('');
+//   // const [page, setPage] = useState(1);
+//   // // const [per_page] = useState(12);
+//   // const [isError, setIsError] = useState('');
+//   // const [showBtn, setShowBtn] = useState(false);
+//   // const [isEmpty, setIsEmpty] = useState(false);
+//   // const [isLoading, setIsLoading] = useState(false);
+
+//   // useEffect(() => {
+//   //   if (!value) {
+//   //     return;
+//   //   }
+//   //   setIsLoading(true);
+//   //   getImages(value, page)
+//   //     .then(data => {
+//   //       setIsEmpty(!data.hits.length);
+//   //       setImages(i => [...i, ...data.hits]);
+//   //       setShowBtn(page < Math.ceil(data.total / 12));
+//   //     })
+//   //     .catch(error => {
+//   //       setIsError(true);
+//   //     })
+//   //     .finally(() => {
+//   //       setIsLoading(false);
+//   //     });
+//   // }, [page, value]);
+
+//   // const nextPage = () => {
+//   //   setPage(page => page + 1);
+//   // };
+
+//   // const handleSubmit = value => {
+//   //   setValue(value);
+//   //   setPage(1);
+//   //   setImages([]);
+//   //   setShowBtn(false);
+//   //   setIsEmpty(false);
+//   // };
+
+//   // const toggleModal = link => {
+//   //   setLargeImgURL(link);
+//   // };
+
+//   return (
+//     <Container>
+//       {/* <SearchBar onSubmit={handleSubmit} />
+//       <ImageGalery images={images} openModal={toggleModal} />
+//       {isEmpty && (
+//         <ErrorMessage>
+//           There are no such images ... Try again {isError}
+//         </ErrorMessage>
+//       )}
+//       {isError && <ErrorMessage>{isError}</ErrorMessage>}
+//       {showBtn && <Btn onClick={nextPage}>Load more</Btn>}
+//       {isLoading && <Loader />}
+//       {largeImgURL && (
+//         <Modal onClose={toggleModal}>
+//           <img src={largeImgURL} alt="largeImg" />
+//         </Modal>
+//       )} */}
+//     </Container>
+//   );
+// };
