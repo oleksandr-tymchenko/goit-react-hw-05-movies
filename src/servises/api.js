@@ -48,7 +48,7 @@ async function getMovies(endpoint, params) {
       }
     );
 
-    // console.log(response.data); // Відповідь від сервера
+    console.log(response.data); // Відповідь від сервера
     return response.data;
   } catch (error) {
     console.error(error);

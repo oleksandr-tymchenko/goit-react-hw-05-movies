@@ -1,10 +1,11 @@
+import React from 'react';
 import { Container } from 'components/App.styled';
 import { useEffect, useState } from 'react';
-import React from 'react';
+
 import { Link } from 'react-router-dom';
 import getMovies from 'servises/api';
-console.log(getMovies);
-const Home = () => {
+
+const Movies = () => {
   const [movies, setMovies] = useState([]);
   const [error, setIsError] = useState(false);
   useEffect(() => {
@@ -16,7 +17,7 @@ const Home = () => {
       .then(data => {
         // setIsEmpty(!data.hits.length);
         setMovies([...data.results]);
-        // console.log(movies);
+        console.log(movies);
 
         // setShowBtn(page < Math.ceil(data.total / 12));
       })
@@ -35,13 +36,18 @@ const Home = () => {
         {movies.map(({ id, title, name }) => {
           return (
             <li key={id}>
-              <Link to={name || title}>{name || title}</Link>
+              <Link to={`${id}`}>
+                {/* <img src={poster_path} alt=""></img> */}
+                {name || title}
+              </Link>
             </li>
           );
         })}
       </ul>
     </Container>
+
+    //   return <div>Movies</div>;
   );
 };
 
-export default Home;
+export default Movies;

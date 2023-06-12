@@ -15,10 +15,12 @@ import { Container, Header, Logo, Link } from './App.styled';
 // import { ImageGalery } from './ImageGallery/ImageGallery';
 
 import React from 'react';
-import Home from './Pages/Home';
-import Movies from './Pages/Movies';
-import MovieDetails from './Pages/MovieDetails';
-import NotFound from './Pages/NotFound';
+import Home from '../Pages/Home';
+import Movies from '../Pages/Movies';
+import MovieDetails from '../Pages/MovieDetails';
+import NotFound from '../Pages/NotFound';
+import { Cast } from './Cast/Cast';
+import Layout from 'Layout/Layout';
 // import getMovies from 'servises/api';
 
 const App = () => {
@@ -26,43 +28,45 @@ const App = () => {
   // console.log(results);
 
   return (
-    <Container>
-      <Header>
-        <Logo>
-          <span role="img" aria-label="computer icon">
-            💻
-          </span>{' '}
-          GoMerch Store
-        </Logo>
-        <nav>
-          <Link to="/">Home</Link>
-          <Link to="/movies">Movies</Link>
-        </nav>
-      </Header>
-
-      <Routes>
-        {/* my practice */}
-        {/* <Route path="/" element=<Layout /> /> */}
-        <Route path="/" element={<Home />} />
-        <Route path="/movies" element={<Movies />} />
-        <Route path="/movies/:movieId" element={<MovieDetails />}>
-          <Route path="cast" element={<div>Cast</div>} />
-          <Route path="reviews" element={<div>Reviews</div>}></Route>
-        </Route>
-
-        <Route path="*" element={<NotFound />} />
-
-        {/* Practice Repeta */}
-        {/* <Route path="/" element={<Layout />}>
+    <Routes>
+      <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
-        <Route path="/dogs" element={<Dogs />} />
-        <Route path="/dogs/:dogId" element={<DogDetails />}>
-          <Route path="subbreeds" element={<Subbreeds />} />
-          <Route path="gallery" element={<Gallery />} />
+        <Route path="movies" element={<Movies />} />
+        <Route path="movies/:movieId" element={<MovieDetails />}>
+          <Route path="cast" element={Cast} />
+          <Route path="reviews" element={<div>Reviews</div>} />
         </Route>
-      </Route> */}
-      </Routes>
-    </Container>
+        <Route path="*" element={<NotFound />} />
+      </Route>
+    </Routes>
+    // <Container>
+    //   <Header>
+    //     <Logo>
+    //       <span role="img" aria-label="computer icon">
+    //         {/* 💻 */}
+    //       </span>{' '}
+    //       Go search Movie
+    //     </Logo>
+    //     <nav>
+    //       <Link to="/">Home</Link>
+    //       <Link to="/movies">Movies</Link>
+    //     </nav>
+    //   </Header>
+
+    //   <Routes>
+    //     {/* my practice */}
+    //     {/* <Route path="/" element=<Layout /> /> */}
+    //     <Route path="/" element={<Home />} />
+
+    //     <Route path="/movies" element={<Movies />} />
+    //     <Route path="/movies/:movieId" element={<MovieDetails />}>
+    //       <Route path="cast" element={Cast} />
+    //       <Route path="reviews" element={<div>Reviews</div>}></Route>
+    //     </Route>
+
+    //     {/* <Route path="*" element={<NotFound />} /> */}
+    //   </Routes>
+    // </Container>
   );
 };
 
