@@ -45,14 +45,16 @@ export const GlobalStyles = css`
   }
 
   a {
-    text-decoration: none;
-    color: inherit;
+    ${'' /* text-decoration: none; */}
+    ${'' /* color: inherit; */}
   }
 
   img {
     display: block;
-    max-width: 100%;
-    height: auto;
+    ${
+      '' /* max-width: 100%;
+    height: auto; */
+    }
   }
 
   code {

@@ -21,6 +21,7 @@ import MovieDetails from '../Pages/MovieDetails';
 import NotFound from '../Pages/NotFound';
 import { Cast } from './Cast/Cast';
 import Layout from 'Layout/Layout';
+import { Reviews } from './Reviews/Reviews';
 // import getMovies from 'servises/api';
 
 const App = () => {
@@ -33,8 +34,8 @@ const App = () => {
         <Route index element={<Home />} />
         <Route path="movies" element={<Movies />} />
         <Route path="movies/:movieId" element={<MovieDetails />}>
-          <Route path="cast" element={Cast} />
-          <Route path="reviews" element={<div>Reviews</div>} />
+          <Route path="cast" element={<Cast />} />
+          <Route path="reviews" element={<Reviews />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Route>

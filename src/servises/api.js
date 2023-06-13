@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { ErrorMessage } from 'components/ErrorMessage/ErrorMessage';
 
 const API_KEY =
   'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkMDYzMDMzNGZmZTI2MzRlNmMyNjU2MjYzNmZhZWJiNCIsInN1YiI6IjY0ODYwNjIyZTM3NWMwMDBhY2M1ZTg5MiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.cLWIZByOdSNx37MEXIfJi9nkHOUBUllZd6OPDNf-0CA';
@@ -51,6 +52,7 @@ async function getMovies(endpoint, params) {
     console.log(response.data); // Відповідь від сервера
     return response.data;
   } catch (error) {
+    <ErrorMessage>There are no such images ... Try again {error}</ErrorMessage>;
     console.error(error);
   }
 }

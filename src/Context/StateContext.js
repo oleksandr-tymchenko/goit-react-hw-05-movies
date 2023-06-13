@@ -6,7 +6,9 @@ export const StateContext = ({ children }) => {
   const [movies, setMovies] = useState([]);
   const [error, setIsError] = useState(false);
   const [moviesBySearch, setMoviesBySearch] = useState([]);
-  console.log('contextmovies', movies);
+  const [searchedMovie, setSearchedMovie] = useState({});
+  const [casts, setCasts] = useState([]);
+  const [reviews, setReviews] = useState([]);
 
   //   const [favorites, setFavorites] = useState([]);
   //   const [searchQuery, setSearchQuery] = useState(false);
@@ -29,6 +31,12 @@ export const StateContext = ({ children }) => {
         setIsError,
         moviesBySearch,
         setMoviesBySearch,
+        searchedMovie,
+        setSearchedMovie,
+        casts,
+        setCasts,
+        reviews,
+        setReviews,
       }}
     >
       {children}

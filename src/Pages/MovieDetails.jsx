@@ -1,69 +1,78 @@
 import { useStateContext } from 'Context/StateContext';
 import React from 'react';
 import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, Outlet, useParams } from 'react-router-dom';
 import getMovies from 'servises/api';
+import {
+  MovieContainer,
+  ImgContainer,
+  InformList,
+  AddContainer,
+  OutletContainer,
+} from './MoviDetails.styled';
+
+const baseImgUrl = 'https://image.tmdb.org/t/p/';
+const posterSize = 'w400';
 
 const MovieDetails = () => {
   const { movieId } = useParams();
-  console.log(movieId);
-  const { movies, setMovies } = useStateContext();
-  console.log('movies', movies);
 
-  const searchedMovie = movies.find(movie => Number(movieId) === movie.id);
-  console.log('searchedMovie', searchedMovie);
-  //   useEffect(() => {
-  //     console.log(id);
-  //   }, [id]);
-  //   console.log(id);
+  const [error, setIsError] = useState(false);
+  const { searchedMovie, setSearchedMovie } = useStateContext();
 
-  // const [movies, setMovies] = useState([]);
-  // const [searchedMovie, setSearchedMovie] = useState({});
-  // const [error, setIsError] = useState(false);
-  // useEffect(() => {
-  //   //   if (!value) {
-  //   //     return;
-  //   //   }
-  //   //   setIsLoading(true);
-  //   getMovies('trending/all/day', {})
-  //     .then(data => {
-  //       // setIsEmpty(!data.hits.length);
-  //       setMovies([...data.results]);
-  //       // console.log(movies);
-  //       const search = movies.find(movie => Number(movieId) === movie.id);
-  //       setSearchedMovie(search);
+  useEffect(() => {
+    const fetchMovieDetails = async () => {
+      try {
+        const data = await getMovies(`movie/${movieId}`, {});
+        console.log('data', data);
+        setSearchedMovie(data);
+      } catch (error) {
+        setIsError(true);
+      }
+    };
 
-  //       // setShowBtn(page < Math.ceil(data.total / 12));
-  //     })
-  //     .catch(error => {
-  //       setIsError(true);
-  //     });
-  //   //   .finally(() => {
-  //   //     setIsLoading(false);
-  //   //   });
-  // }, []);
+    fetchMovieDetails();
+  }, [movieId, setSearchedMovie]);
 
-  //   console.log(movies);
-  //   const searchedMovie = movies.find(movie => Number(movieId) === movie.id);
-  // console.log(searchedMovie);
+  const { title, name, poster_path, overview, genres, vote_average } =
+    searchedMovie;
   return (
     <div>
-      <div>
-        <h2>{searchedMovie.title || searchedMovie.name}</h2>
+      <MovieContainer>
+        <ImgContainer>
+          <img
+            src={baseImgUrl + posterSize + poster_path}
+            alt="img"
+            width="200"
+          ></img>
+        </ImgContainer>
 
-        <img src={searchedMovie.poster_path} alt=""></img>
-        <h3>Overview</h3>
-        <p>{searchedMovie.overview} </p>
-      </div>
-
-      <ul>
-        <li>
-          <Link to="cast">Cast</Link>
-        </li>
-        <li>
-          <Link to="reviews">Reviews</Link>
-        </li>
-      </ul>
+        <div>
+          <h2>{title || name}</h2>
+          <p>User Score: {Math.ceil(vote_average * 10)}%</p>
+          <h3>Overview</h3>
+          <p>{overview} </p>
+          <h3>Genres</h3>
+          <p>
+            {genres &&
+              genres.map(genre => <span key={genre.id}>{genre.name} </span>)}
+          </p>
+        </div>
+      </MovieContainer>
+      <AddContainer>
+        <h3>Additional information</h3>
+        <InformList>
+          <li>
+            <Link to="cast">Cast</Link>
+          </li>
+          <li>
+            <Link to="reviews">Reviews</Link>
+          </li>
+        </InformList>
+      </AddContainer>
+      <AddContainer>
+        <Outlet />
+      </AddContainer>
     </div>
   );
 };
