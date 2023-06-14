@@ -2,19 +2,19 @@ import { useEffect, useState } from 'react';
 import React from 'react';
 
 import getMovies from 'servises/api';
-import { useStateContext } from 'Context/StateContext';
+// import { useStateContext } from 'Context/StateContext';
 import { MoviesContainer } from 'components/MoviesContainer/MoviesContainer';
-import {
-  MoviesList,
-  MoviesWrap,
-} from 'components/MoviesContainer/MovisContainer.styled';
-import { ErrorMessage } from 'formik';
-import { Link } from 'react-router-dom';
+// import {
+//   MoviesList,
+//   MoviesWrap,
+// } from 'components/MoviesContainer/MovisContainer.styled';
+// import { ErrorMessage } from 'formik';
+// import { Link } from 'react-router-dom';
 // console.log(getMovies);
 const Home = () => {
   const [movies, setMovies] = useState([]);
   // const { movies, setMovies } = useStateContext();
-  const [isEmpty, setIsEmpty] = useState(false);
+  // const [isEmpty, setIsEmpty] = useState(false);
   const [isError, setIsError] = useState('');
 
   // console.log(movies, setMovies);
@@ -24,23 +24,37 @@ const Home = () => {
     //   return;
     // }
     //   setIsLoading(true);
-    getMovies('trending/all/day', {})
-      .then(data => {
-        // setIsEmpty(!data.results.length);
-        setMovies([...data.results]);
-        // console.log(movies);
 
-        // setShowBtn(page < Math.ceil(data.total / 12));
-      })
-      .catch(error => {
+    async function fetchMovies() {
+      try {
+        const data = await getMovies('trending/all/day', {});
+        setMovies([...data.results]);
+      } catch (error) {
         setIsError(true);
-      });
+      }
+    }
+    // getMovies('trending/all/day', {})
+    //   .then(data => {
+    //     // setIsEmpty(!data.results.length);
+    //     setMovies([...data.results]);
+    //     // console.log(movies);
+
+    //     // setShowBtn(page < Math.ceil(data.total / 12));
+    //   })
+    // .catch(error => {
+    //   setIsError(true);
+    // });
     //   .finally(() => {
     //     setIsLoading(false);
     //   });
+    fetchMovies();
   }, []);
-  console.log(movies);
-  return <MoviesContainer movies={movies} />;
+  return (
+    <>
+      <h1> The best daily movies for you</h1>
+      <MoviesContainer movies={movies} />;
+    </>
+  );
   // return (
   //   <MoviesWrap>
   //     {isEmpty && (

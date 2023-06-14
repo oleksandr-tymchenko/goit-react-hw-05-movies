@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 const Context = createContext();
 
@@ -9,6 +10,7 @@ export const StateContext = ({ children }) => {
   const [searchedMovie, setSearchedMovie] = useState({});
   const [casts, setCasts] = useState([]);
   const [reviews, setReviews] = useState([]);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   //   const [favorites, setFavorites] = useState([]);
   //   const [searchQuery, setSearchQuery] = useState(false);
@@ -37,6 +39,8 @@ export const StateContext = ({ children }) => {
         setCasts,
         reviews,
         setReviews,
+        searchParams,
+        setSearchParams,
       }}
     >
       {children}

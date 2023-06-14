@@ -1,7 +1,7 @@
 import { useStateContext } from 'Context/StateContext';
-import React from 'react';
+import React, { useRef } from 'react';
 import { useEffect, useState } from 'react';
-import { Link, Outlet, useParams } from 'react-router-dom';
+import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 import getMovies from 'servises/api';
 import {
   MovieContainer,
@@ -15,6 +15,8 @@ const baseImgUrl = 'https://image.tmdb.org/t/p/';
 const posterSize = 'w400';
 
 const MovieDetails = () => {
+  const location = useLocation();
+  const backLocationRef = useRef(location.state?.from ?? '/');
   const { movieId } = useParams();
 
   const [error, setIsError] = useState(false);
@@ -38,6 +40,7 @@ const MovieDetails = () => {
     searchedMovie;
   return (
     <div>
+      <Link to={backLocationRef.current}> ◀ Go back</Link>
       <MovieContainer>
         <ImgContainer>
           <img
