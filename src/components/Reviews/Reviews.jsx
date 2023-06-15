@@ -7,20 +7,18 @@ import getMovies from 'servises/api';
 import { Text, Title } from './Reviews.styled';
 import { ErrorMessage } from 'components/ErrorMessage/ErrorMessage';
 
-export const Reviews = () => {
+const Reviews = () => {
   const { movieId } = useParams();
-  console.log(movieId);
+
   const { reviews, setReviews } = useStateContext();
-  const [error, setIsError] = useState(false);
+  const [isError, setIsError] = useState(false);
   const [isEmpty, setIsEmpty] = useState(true);
 
   useEffect(() => {
-    // if (!reviews) return;
     const fetchMovieDetails = async () => {
       try {
         const data = await getMovies(`movie/${movieId}/reviews`, { page: 1 });
         setIsEmpty(!data.results.length);
-        console.log('data', data);
         setReviews(data.results);
       } catch (error) {
         setIsError(true);
@@ -29,7 +27,6 @@ export const Reviews = () => {
 
     fetchMovieDetails();
   }, [movieId, setReviews]);
-  console.log(reviews);
   return (
     <section>
       {reviews &&
@@ -46,6 +43,11 @@ export const Reviews = () => {
           We don't have any revievs for this movie yet.
         </ErrorMessage>
       )}
+      {isError && (
+        <ErrorMessage>Sorry, something wrong. {isError}</ErrorMessage>
+      )}
     </section>
   );
 };
+
+export default Reviews;

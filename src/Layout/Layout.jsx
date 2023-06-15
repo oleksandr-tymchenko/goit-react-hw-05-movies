@@ -1,5 +1,6 @@
 import { Container, Header, Logo, Link } from 'components/App.styled';
-import React from 'react';
+import { Loader } from 'components/Loader/Loader';
+import React, { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 
 const Layout = () => {
@@ -17,7 +18,9 @@ const Layout = () => {
           <Link to="/movies">Movies</Link>
         </nav>
       </Header>
-      <Outlet />
+      <Suspense fallback={<Loader />}>
+        <Outlet />
+      </Suspense>
     </Container>
   );
 };

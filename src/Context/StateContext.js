@@ -12,18 +12,6 @@ export const StateContext = ({ children }) => {
   const [reviews, setReviews] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
 
-  //   const [favorites, setFavorites] = useState([]);
-  //   const [searchQuery, setSearchQuery] = useState(false);
-  //   const [isCartModalOpen, setIsCartModalOpen] = useState(false);
-
-  //   useEffect(() => {
-  //     const cartLS = JSON.parse(localStorage.getItem('cart')) || [];
-  //     const favoritesLS = JSON.parse(localStorage.getItem('favorites')) || [];
-
-  //     setCart(cartLS);
-  //     setFavorites(favoritesLS);
-  //   }, []);
-
   return (
     <Context.Provider
       value={{

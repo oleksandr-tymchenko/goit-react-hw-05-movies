@@ -4,21 +4,20 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import getMovies from 'servises/api';
 import { Character, ImgWrap, Wrapper } from './Cast.styled';
-console.log(useParams);
+import { ErrorMessage } from 'components/ErrorMessage/ErrorMessage';
 
 const baseImgUrl = 'https://image.tmdb.org/t/p/';
 const posterSize = 'w200';
-export const Cast = () => {
+
+const Cast = () => {
   const { movieId } = useParams();
   const { casts, setCasts } = useStateContext();
-  const [error, setIsError] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
-    // if (!casts) return;
     const fetchMovieDetails = async () => {
       try {
         const data = await getMovies(`movie/${movieId}/credits`, {});
-        // console.log('data', data);
         setCasts(data.cast);
       } catch (error) {
         setIsError(true);
@@ -27,12 +26,11 @@ export const Cast = () => {
 
     fetchMovieDetails();
   }, [movieId, setCasts]);
-  // const { name, character, profile_path } = casts;
   return (
     <section>
       {casts &&
-        casts.map(({ id, name, character, profile_path }) => (
-          <Wrapper key={id}>
+        casts.map(({ name, character, profile_path }) => (
+          <Wrapper key={name}>
             <ImgWrap>
               <img src={baseImgUrl + posterSize + profile_path} alt="actor" />
             </ImgWrap>
@@ -42,6 +40,11 @@ export const Cast = () => {
             <Character>{character}</Character>
           </Wrapper>
         ))}
+      {isError && (
+        <ErrorMessage>Sorry, something wrong. {isError}</ErrorMessage>
+      )}
     </section>
   );
 };
+
+export default Cast;
