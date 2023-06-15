@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import { Link, useLocation } from 'react-router-dom';
 import { MoviesList, MoviesWrap } from './MovisContainer.styled';
 
@@ -18,4 +20,7 @@ export const MoviesContainer = ({ movies }) => {
       </MoviesList>
     </MoviesWrap>
   );
+};
+MoviesContainer.propTypes = {
+  movies: PropTypes.array,
 };

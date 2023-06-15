@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import { useStateContext } from 'Context/StateContext';
 import { MoviesList } from 'components/MoviesContainer/MovisContainer.styled';
 import { useEffect, useState } from 'react';
@@ -13,11 +15,14 @@ const Cast = () => {
   const { movieId } = useParams();
   const { casts, setCasts } = useStateContext();
   const [isError, setIsError] = useState(false);
+  const [isEmpty, setIsEmpty] = useState(true);
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
       try {
         const data = await getMovies(`movie/${movieId}/credits`, {});
+
+        setIsEmpty(!data.cast.length);
         setCasts(data.cast);
       } catch (error) {
         setIsError(true);
@@ -40,6 +45,9 @@ const Cast = () => {
             <Character>{character}</Character>
           </Wrapper>
         ))}
+      {isEmpty && (
+        <ErrorMessage>Sorry, we don't have data about the cast</ErrorMessage>
+      )}{' '}
       {isError && (
         <ErrorMessage>Sorry, something wrong. {isError}</ErrorMessage>
       )}
@@ -48,3 +56,7 @@ const Cast = () => {
 };
 
 export default Cast;
+
+Cast.propTypes = {
+  movieId: PropTypes.string,
+};

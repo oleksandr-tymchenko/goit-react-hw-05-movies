@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import axios from 'axios';
 
 const API_KEY =
@@ -44,3 +46,8 @@ async function getMovies(endpoint, params) {
 // }
 
 export default getMovies;
+
+getMovies.propTypes = {
+  endpoint: PropTypes.string.isRequired,
+  params: PropTypes.object,
+};

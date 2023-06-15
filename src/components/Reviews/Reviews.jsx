@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import { useStateContext } from 'Context/StateContext';
 import { Wrapper } from 'components/Cast/Cast.styled';
 import { MoviesList } from 'components/MoviesContainer/MovisContainer.styled';
@@ -51,3 +53,6 @@ const Reviews = () => {
 };
 
 export default Reviews;
+Reviews.propTypes = {
+  movieId: PropTypes.string,
+};
