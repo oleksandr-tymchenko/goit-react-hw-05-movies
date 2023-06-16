@@ -1,4 +1,4 @@
-import { useStateContext } from 'Context/StateContext';
+// import { useStateContext } from 'Context/StateContext';
 import React, { Suspense, useRef } from 'react';
 import { useEffect, useState } from 'react';
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
@@ -12,6 +12,8 @@ import {
 import { ErrorMessage } from 'components/ErrorMessage/ErrorMessage';
 import { Loader } from 'components/Loader/Loader';
 
+const defaultImg =
+  'https://pixabay.com/get/gb9dd3c71e9de8fe4e98abb1e4dfec78e2a56f0424c00f647d5a53bbd90ffecff254ece495dcf16c721ad6db43591c70d74b636381ae8e9352178e546cc3d8e7c_640.jpg';
 const baseImgUrl = 'https://image.tmdb.org/t/p/';
 const posterSize = 'w400';
 
@@ -21,12 +23,12 @@ const MovieDetails = () => {
   const { movieId } = useParams();
   const [isError, setIsError] = useState(false);
 
-  const { searchedMovie, setSearchedMovie } = useStateContext();
-
+  // const { searchedMovie, setSearchedMovie } = useStateContext();
+  const [searchedMovie, setSearchedMovie] = useState(null);
   useEffect(() => {
     const fetchMovieDetails = async () => {
       try {
-        const data = await getMovies(`movie/${movieId}`, {});
+        const data = await getMovies(`movie/${movieId}`);
 
         setSearchedMovie(data);
       } catch (error) {
@@ -35,8 +37,8 @@ const MovieDetails = () => {
     };
 
     fetchMovieDetails();
-  }, [movieId, setSearchedMovie]);
-
+  }, [movieId]);
+  if (!searchedMovie) return;
   const { title, name, poster_path, overview, genres, vote_average } =
     searchedMovie;
 
@@ -51,9 +53,14 @@ const MovieDetails = () => {
           <MovieContainer>
             <ImgContainer>
               <img
-                src={baseImgUrl + posterSize + poster_path}
+                src={
+                  poster_path
+                    ? baseImgUrl + posterSize + poster_path
+                    : defaultImg
+                }
                 alt="img"
                 width="200"
+                height="290"
               ></img>
             </ImgContainer>
 

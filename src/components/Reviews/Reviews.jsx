@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-import { useStateContext } from 'Context/StateContext';
+// import { useStateContext } from 'Context/StateContext';
 import { Wrapper } from 'components/Cast/Cast.styled';
 import { MoviesList } from 'components/MoviesContainer/MovisContainer.styled';
 import { useEffect, useState } from 'react';
@@ -12,7 +12,8 @@ import { ErrorMessage } from 'components/ErrorMessage/ErrorMessage';
 const Reviews = () => {
   const { movieId } = useParams();
 
-  const { reviews, setReviews } = useStateContext();
+  // const { reviews, setReviews } = useStateContext();
+  const [reviews, setReviews] = useState(null);
   const [isError, setIsError] = useState(false);
   const [isEmpty, setIsEmpty] = useState(true);
 
@@ -28,7 +29,8 @@ const Reviews = () => {
     };
 
     fetchMovieDetails();
-  }, [movieId, setReviews]);
+  }, [movieId]);
+  if (!reviews) return;
   return (
     <section>
       {reviews &&

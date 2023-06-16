@@ -7,9 +7,9 @@ export const StateContext = ({ children }) => {
   const [movies, setMovies] = useState([]);
   const [error, setIsError] = useState(false);
   const [moviesBySearch, setMoviesBySearch] = useState([]);
-  const [searchedMovie, setSearchedMovie] = useState({});
-  const [casts, setCasts] = useState([]);
-  const [reviews, setReviews] = useState([]);
+  // const [searchedMovie, setSearchedMovie] = useState({});
+  // const [casts, setCasts] = useState([]);
+  // const [reviews, setReviews] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
 
   return (
@@ -21,12 +21,12 @@ export const StateContext = ({ children }) => {
         setIsError,
         moviesBySearch,
         setMoviesBySearch,
-        searchedMovie,
-        setSearchedMovie,
-        casts,
-        setCasts,
-        reviews,
-        setReviews,
+        // searchedMovie,
+        // setSearchedMovie,
+        // casts,
+        // setCasts,
+        // reviews,
+        // setReviews,
         searchParams,
         setSearchParams,
       }}
