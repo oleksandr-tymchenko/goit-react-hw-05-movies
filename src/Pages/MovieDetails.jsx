@@ -13,7 +13,7 @@ import { ErrorMessage } from 'components/ErrorMessage/ErrorMessage';
 import { Loader } from 'components/Loader/Loader';
 
 const defaultImg =
-  'https://pixabay.com/get/gb9dd3c71e9de8fe4e98abb1e4dfec78e2a56f0424c00f647d5a53bbd90ffecff254ece495dcf16c721ad6db43591c70d74b636381ae8e9352178e546cc3d8e7c_640.jpg';
+  'https://pixabay.com/get/g1fb216f68fd15987d69665124f8274d571bf380a2a249a266a08b9fe7512aca87cf1bd34ee0b538daf50448b9c639392499057e0979396b58144757a9b8600e3_640.jpg';
 const baseImgUrl = 'https://image.tmdb.org/t/p/';
 const posterSize = 'w400';
 

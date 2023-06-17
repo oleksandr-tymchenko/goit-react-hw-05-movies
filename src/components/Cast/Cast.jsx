@@ -11,7 +11,7 @@ import { ErrorMessage } from 'components/ErrorMessage/ErrorMessage';
 const baseImgUrl = 'https://image.tmdb.org/t/p/';
 const posterSize = 'w200';
 const defaultImg =
-  'https://pixabay.com/get/g0ea2319d4b1ddafded6bf46baa76496d06084b613a36cef31c004e602165d64dcd9126cb36a4af8f3cbbf86b3135f070eeecb26bd14da2ff7c4e14613bb1ed76_640.jpg';
+  'https://pixabay.com/get/gf4201b2776d3ef00ca47b99d7c2be5d3293d07fa7340c4b1a34e2b1cbaa75782da6643825efb9764753eb4e54fcb2d343599d59a9850206fd172e16607af5daf_640.jpg';
 
 const Cast = () => {
   const { movieId } = useParams();
