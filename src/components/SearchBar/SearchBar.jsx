@@ -17,6 +17,7 @@ export default function SearchBar({ onSubmit }) {
     form.elements.searchQuery.value
       ? setSearchParams({ query: form.elements.searchQuery.value })
       : setSearchParams({});
+    // onSubmit(searchParams.get('query'));
     form.reset();
   };
 

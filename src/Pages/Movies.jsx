@@ -11,6 +11,8 @@ const Movies = () => {
   const [searchedMovies, setSearchedMovies] = useState([]);
 
   const { searchParams } = useStateContext();
+  // const [searchQuery, setSearchQuery] = useState('');
+
   const searchQuery = searchParams.get('query') ?? '';
 
   useEffect(() => {
@@ -30,6 +32,9 @@ const Movies = () => {
 
     fetchMovieDetails();
   }, [searchQuery]);
+  // const handleSubmit = query => {
+  //   setSearchQuery(query);
+  // };
 
   return (
     <>
