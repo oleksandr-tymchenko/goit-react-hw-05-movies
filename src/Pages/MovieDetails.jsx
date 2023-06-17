@@ -13,7 +13,7 @@ import { ErrorMessage } from 'components/ErrorMessage/ErrorMessage';
 import { Loader } from 'components/Loader/Loader';
 
 const defaultImg =
-  'https://pixabay.com/get/g1fb216f68fd15987d69665124f8274d571bf380a2a249a266a08b9fe7512aca87cf1bd34ee0b538daf50448b9c639392499057e0979396b58144757a9b8600e3_640.jpg';
+  'https://st.depositphotos.com/1001877/1469/i/950/depositphotos_14695835-stock-photo-vintage-movie-camera-3d.jpg';
 const baseImgUrl = 'https://image.tmdb.org/t/p/';
 const posterSize = 'w400';
 
